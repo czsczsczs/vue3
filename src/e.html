@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="app">
+            <button @click="countNum+=1">点击+1</button>
+            <span>{{countNum}}</span>
+            <div ref="refe">啦啦啦啦啦啦啦啦啦啦</div>
+            <button @click="destroyVue()">销毁</button>
+        </div>
+        <script src="https://unpkg.com/vue@3"></script>
+        <script>
+            var storage = window.sessionStorage;
+            alert(storage.getItem());
+        </script>
+        <script>
+            const { ref,createApp, onMounted } = Vue;
+            const app = createApp({
+                setup() {
+                    let refe = ref();
+                    onMounted(() => {
+                        console.log('挂在', refe);
+                    });
+                    return {
+                        onMounted,
+                    };
+                    console.log('setup', refe);
+                },
+                data() {
+                    return {
+                        countNum: 0,
+                    };
+                },
+                methods: {
+                    destroyVue() {},
+                },
+            });
+            app.mount('#app');
+        </script>
+    </body>
+</html>

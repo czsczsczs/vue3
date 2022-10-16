@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3.2.33/dist/vue.global.js"></script>
+    <!-- <script type="text/javascript" src="http://api.map.baidu.com/location/ip?ak=Idq3Pnde1Yk5dXGbPlhYTg45URnGmvtG&ip=10.0.0.187&coor=bd09ll"></script> -->
+    <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=Idq3Pnde1Yk5dXGbPlhYTg45URnGmvtG"></script>
+    <style>
+        #app{
+            font-family: sans-serif;
+  border: 1px solid #eee;
+  border-radius: 2px;
+  padding: 20px 30px;
+  margin-top: 1em;
+  margin-bottom: 40px;
+  user-select: none;
+  overflow-x: auto;
+        }
+     .tab-button{
+        padding: 6px 10px;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        border: 1px solid #ccc;
+        cursor: pointer;
+        background: #f0f0f0;
+        margin-bottom: -1px;
+        margin-right: -1px;
+     }
+     .tab-button:hover{
+        background: #e0e0e0;
+     }
+     .tab-button.active{
+        background: #e0e0e0;
+     }
+     .demo-tab {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+.map{
+    width: 100%;
+    height: 800px;
+}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button id="buyyy">点击</button>
+        <button
+        v-for="tab in tabs"
+        :key="tab"
+        :class="['tab-button',{active:currentTab===tab}]"
+        @click="currentTab=tab"
+        >
+        {{tab}}
+    </button>
+    <a href="C:/Users/Administrator/Desktop/22999.docx">1111</a>
+    <component :is="currentTabCompoent"></component>
+    
+    </div>
+    <div id="map" class="map"></div>
+    <script>
+    
+        const home={
+            template:`
+            <div class="demo-tab">Home component</div>
+            `,
+        }
+        const posts={
+            template:`
+            <div class="demo-tab">Posts component</div>
+            `,
+        }
+        const archive={
+            template:`
+            <div class="demo-tab">Archive component</div>
+            `,
+        }
+        const a=Vue.createApp({
+            data(){
+                    return{
+                      currentTab:'Home',
+                      tabs:['Home','Posts','Achive']
+                    }
+                },
+            computed:{
+                currentTabCompoent(){
+                    return 'tab-'+this.currentTab.toLowerCase()
+                }
+            },
+            methods: {
+               
+            },
+            components:{
+                'tab-home':home,
+                'tab-posts':posts,
+                'tab-achive':archive
+
+            },
+    });
+
+    a.mount("#app");
+    </script>
+<script>
+var btn = document.getElementById('buyyy');
+var aaa=btn.click();
+console.log(aaa);
+
+
+
+
+// 百度地图API功能
+var map = new BMap.Map("map"); // 创建Map实例
+map.centerAndZoom(new BMap.Point(104.07258, 30.550701), 20); // 初始化地图,设置中心点坐标和地图级别
+//添加地图类型控件
+map.addControl(
+   new BMap.MapTypeControl({
+     mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP],
+   })
+);
+map.setCurrentCity("成都"); // 设置地图显示的城市 此项是必须设置的
+map.enableScrollWheelZoom(true);
+</script>
+</body>
+</html>

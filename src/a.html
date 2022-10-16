@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://unpkg.com/vue@3.2.33/dist/vue.global.js"></script>
+        <style>
+            .fade-enter-active,
+            .fade-leave-active {
+                transition: opacity 0.5s;
+            }
+
+            .fade-enter,
+        .fade-leave-to
+
+        /* .fade-leave-active below version 2.1.8 */ {
+                opacity: 0;
+            }
+
+            .demo1 {
+                height: 100px;
+                width: 100px;
+                background-color: grey;
+            }
+
+            .demo2 {
+                height: 50px;
+                width: 50px;
+                background-color: rgb(233, 37, 37);
+            }
+
+            button {
+                text-align: center;
+                margin: 0 auto;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="app">
+            <base-input></base-input>
+        </div>
+        <script>
+            const app = Vue.createApp({});
+            app.component('base-input', {
+                data() {
+                    return {
+                        list: ['大哥', '天天', '信息', '试试', '方法'],
+                    };
+                },
+                template: `
+                    <ul >
+
+                      <li ref="aaa">
+
+                      大哥
+
+                      </li>
+
+                      </ul>
+                    `,
+
+                mounted() {
+                    this.$nextTick(() => {}, 1000);
+                },
+            });
+
+            app.mount('#app');
+
+            const a = Symbol('a');
+            const b = Symbol('a');
+            const obj = {
+                [a]: 1,
+                [b]: 1,
+            };
+            console.log(obj.a == obj.b);
+        </script>
+    </body>
+</html>
